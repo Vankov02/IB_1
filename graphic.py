@@ -9,7 +9,7 @@ import tkinter.messagebox as mb
 
 def open_file(file_name):
     try:
-        opener = 'open' if sys.platform == 'drawin' else 'xdg-open'
+        opener = 'notepad' if sys.platform == 'win32' else 'xdg-open'
         subprocess.call([opener, file_name])
     except FileNotFoundError:
         mb.showerror("Ошибка", "Невозможно открыть файл")
@@ -68,7 +68,7 @@ def gamming_button(source):
         output.write(str(bit))
     output.close()
 
-    opener = 'start' if os.name == 'nt' else 'xdg-open'
+    opener = 'notepad' if sys.platform == 'win32' else 'xdg-open'
     subprocess.call([opener, 'ResultGamming.txt'])
     subprocess.call([opener, 'key.txt'])
 
@@ -86,7 +86,10 @@ def decipher_gamm_button():
     output.write(message)
     output.close()
 
-    opener = 'open' if sys.platform == 'drawin' else 'xdg-open'
+    # opener = 'open' if sys.platform == 'drawin' else 'xdg-open'
+    # subprocess.call([opener, 'decipherText.txt'])
+
+    opener = 'notepad' if sys.platform == 'win32' else 'xdg-open'
     subprocess.call([opener, 'decipherText.txt'])
 
 
@@ -103,7 +106,7 @@ def decipher_scram_button():
     output.write(message)
     output.close()
 
-    opener = 'open' if sys.platform == 'drawin' else 'xdg-open'
+    opener = 'notepad' if sys.platform == 'win32' else 'xdg-open'
     subprocess.call([opener, 'decipherText.txt'])
 
 
@@ -130,7 +133,7 @@ def scrambler_button(source):
         output.write(str(bit))
     output.close()
 
-    opener = 'open' if sys.platform == 'drawin' else 'xdg-open'
+    opener = 'notepad' if sys.platform == 'win32' else 'xdg-open'
     subprocess.call([opener, 'ResultScrambler.txt'])
     subprocess.call([opener, 'keyScram.txt'])
 
@@ -160,7 +163,7 @@ def alias_decipher():
 
 def initialization(source):
     root = tk.Tk()
-    root.title("Gamm. and Scram.")
+    root.title("ИБ Лабораторная работа 1")
     img = Image.open('bg9try.jpg')
     width = 500
     ratio = (width / float(img.size[0]))
@@ -172,11 +175,16 @@ def initialization(source):
     p_entry = tk.Entry(root, bd=5)
     p_entry.pack()
     # , p_entry.get()
-    tk.Button(root, text='Открыть файл', command=lambda: open_file(p_entry.get()), activebackground = 'black').place(x=75, y=50)
-    tk.Button(root, text='Расшифровать\nгаммирование', command=lambda: decipher_gamm_button(), activebackground = 'black').place(x=75, y=90)
-    tk.Button(root, text='Расшифровать\nскремблер', command=lambda: decipher_scram_button(), activebackground = 'black').place(x=280, y=90)
-    tk.Button(root, text='Шифровать при\nпомощи скремблера', command=lambda: scrambler_button(source), activebackground = 'black').place(x=270, y=150)
-    tk.Button(root, text='Выполнить\nгаммирование', command=lambda: gamming_button(source), activebackground = 'black').place(x=75, y=150)
+    tk.Button(root, text='Открыть файл', command=lambda: open_file(p_entry.get()),
+              activebackground='black').place(x=75, y=50)
+    tk.Button(root, text='Расшифровать\nгаммирование', command=lambda: decipher_gamm_button(),
+              activebackground='black').place(x=75, y=90)
+    tk.Button(root, text='Расшифровать\nскремблер', command=lambda: decipher_scram_button(),
+              activebackground='black').place(x=280, y=90)
+    tk.Button(root, text='Шифровать при\nпомощи скремблера', command=lambda: scrambler_button(source),
+              activebackground='black').place(x=270, y=150)
+    tk.Button(root, text='Выполнить\nгаммирование', command=lambda: gamming_button(source),
+              activebackground='black').place(x=75, y=150)
     tk.Button(root, text='Изменить текст\nдля шифрования', command=open_text,
               activebackground='black').place(x=60, y=220)
     tk.Button(root, text='Посмотреть/Изменить\nзашифрованый текст', command=open_cipher,
