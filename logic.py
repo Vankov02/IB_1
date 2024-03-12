@@ -28,7 +28,10 @@ def create_rand_key(m):
     # Функция для создания случайного ключа
     # 1 step
     q = gen_right_prime_number(0xfffffff, 0xffffffffffffff)
-    # Генерация правильного простого числа q
+    # Генерация правильного простого числа q ( 0xfffffff представляет собой число в шестнадцатеричной системе счисления,
+    # которое равно десятичному числу 268435455.
+    # 0xffffffffffffff представляет собой число в шестнадцатеричной системе счисления, которое равно десятичному числу
+    # 281474976710655.)
     p = gen_right_prime_number(0xffffffff, 0xffffffffffffff)
     # Генерация правильного простого числа p
     N = p * q
@@ -50,7 +53,7 @@ def create_rand_key(m):
         # Вычисление следующего элемента последовательности u
         x.append(u[i+1] & 0b1)
         # Получение каждого второго элемента последовательности u и добавление его в список x
-    #step 4
+    # step 4
     while len(x) % 8 > 0:
         # Пока длина списка x не будет кратна 8, выполняется цикл
         x = [0].append(x)
@@ -103,7 +106,7 @@ def str2bits(message):
 # преобразование битовой строки в строку символов (байтовую строку)
 def bits2str(bit_str):
     # Создаем пустую строку для хранения результирующего сообщения
-    resString = b''
+    res_string = b''
     # Итерируемся по битовой строке с шагом 8, чтобы извлечь байты
     for i in range(0, len(bit_str), 8):
         # Инициализируем переменную для хранения текущего символа
@@ -113,9 +116,9 @@ def bits2str(bit_str):
             # Вычисляем значение символа, применяя операции побитового сдвига и сложения
             symbol += bit_str[i + j] * 2 ** (7 - j)
         # Преобразуем целое число в байт и добавляем его к результирующей строке
-        resString += symbol.to_bytes(1, byteorder='little', signed=False)
+        res_string += symbol.to_bytes(1, byteorder='little', signed=False)
     # Возвращаем расшифрованное текстовое сообщение
-    return resString
+    return res_string
 
 
 def xor_bits_str(Fstr, Sstr):
@@ -237,10 +240,12 @@ def scrambler(polinom, startstr, message):
         # Получаем следующий бит, используя XOR над текущим состоянием скремблера и полиномом
         nextbit = xor_bit_str(add_bits_str(scramStr, polinom))
         # Добавляем последний бит текущего состояния скремблера в массив temp
-        temp.append(scramStr[7])
+        # temp.append(scramStr[7])
+        temp.append(scramStr[6])
 
         # Сдвигаем состояние скремблера вправо на один бит
-        for j in range(7, 0, -1):
+        # ((7, 0, -1))
+        for j in range(6, -1, -1):
             scramStr[j] = scramStr[j - 1]
         # Устанавливаем первый бит скремблера в новое значение nextbit
         scramStr[0] = nextbit
@@ -343,7 +348,7 @@ def correlation():
     print('e =', e, 'n =', n, 'size = ', len(key))
     # Вычисление и вывод результата корреляции
     print('result = ', abs((e - n) / len(key)))
-    if abs((e - n) / len(key)) < 0.05 :
+    if abs((e - n) / len(key)) < 0.05:
         # Проверка гипотезы о корреляции
         print("Гипотеза о корреляции не отвергается")
     else:
@@ -371,7 +376,7 @@ def balance():
     print('e =', e, 'n =', n, 'size = ', len(key))
     # Проверка сбалансированности последовательности
     print('result = ', abs(e - n))
-    if (abs(e - n) <= 1):
+    if abs(e - n) <= 1:
         print("Последовательность сбалансирована")
     else:
         print("Последовательность не сбалансирована")
