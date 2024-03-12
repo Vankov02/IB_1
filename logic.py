@@ -312,8 +312,8 @@ def find_period():
         # Добавление текущего состояния скремблера в список временных результатов
         nextbit = xor_bit_str(add_bits_str(scramStr, polinom))
         # Вычисление следующего бита
-        lastNum = scramStr[7]
-        for j in range(7, 0, -1):
+        lastNum = scramStr[6]
+        for j in range(6, -1, -1):
             scramStr[j] = scramStr[j - 1]
         scramStr[0] = nextbit
         i += 1

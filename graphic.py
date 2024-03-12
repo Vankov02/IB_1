@@ -235,25 +235,25 @@ def initialization(source):
     p_entry.pack()
     # Создание кнопки для открытия файла с указанным именем
     tk.Button(root, text='Открыть файл', command=lambda: open_file(p_entry.get()),
-              activebackground='black').place(x=75, y=50)
+              activebackground='black').place(x=200, y=50)
     # Создание кнопки для расшифровки текста, зашифрованного методом гаммирования
     tk.Button(root, text='Расшифровать\nгаммирование', command=lambda: decipher_gamm_button(),
               activebackground='black').place(x=75, y=90)
     # Создание кнопки для расшифровки текста, зашифрованного скремблером
     tk.Button(root, text='Расшифровать\nскремблер', command=lambda: decipher_scram_button(),
-              activebackground='black').place(x=280, y=90)
+              activebackground='black').place(x=310, y=90)
     # Создание кнопки для шифрования текста методом скремблера
     tk.Button(root, text='Шифровать при\nпомощи скремблера', command=lambda: scrambler_button(source),
-              activebackground='black').place(x=270, y=150)
+              activebackground='black').place(x=290, y=150)
     # Создание кнопки для выполнения гаммирования текста
     tk.Button(root, text='Выполнить\nгаммирование', command=lambda: gamming_button(source),
               activebackground='black').place(x=75, y=150)
     # Создание кнопки для изменения текста для шифрования
     tk.Button(root, text='Изменить текст\nдля шифрования', command=open_text,
-              activebackground='black').place(x=60, y=220)
+              activebackground='black').place(x=70, y=220)
     # Создание кнопки для просмотра и изменения зашифрованного текста
     tk.Button(root, text='Посмотреть/Изменить\nзашифрованый текст', command=open_cipher,
-              activebackground='black').place(x=255, y=220)
+              activebackground='black').place(x=290, y=220)
     # Запуск главного цикла обработки событий
     root.mainloop()
 
